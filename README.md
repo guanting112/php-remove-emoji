@@ -4,6 +4,7 @@ PHP Remove Emoji
 [![PHP Test](https://github.com/guanting112/php-remove-emoji/actions/workflows/php.yml/badge.svg)](https://github.com/guanting112/php-remove-emoji/actions/workflows/php.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+Remove Emoji for PHP / Laravel 😈🈲,
 This is a PHP library developed for "removing" Unicode Emoji icons, you can use this library to remove annoying Emoji symbols.
 
 ![emoji](https://i.imgur.com/4mow6Pf.png)
