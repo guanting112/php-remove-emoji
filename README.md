@@ -28,8 +28,7 @@ use RemoveEmoji\RemoveEmoji;
 
 $original_string = "😊😍😌🤕👿👹🍏🍐🍑🍒🍓🍔🍕🍖🍗👌☝🏼🥝🥦🌶🌽🍎";
 
-$remover = new RemoveEmoji();
-echo $remover->remove($original_string);
+echo RemoveEmoji::remove($original_string);
 ```
 
 ```php
@@ -61,8 +60,7 @@ STRING;
 # ==========
 #   Output
 # ==========
-$remover = new RemoveEmoji();
-echo $remover->remove($original_string);
+echo RemoveEmoji::remove($original_string);
 
 # Result:
 # abcdefghijklmnopqrstuvwxyz....0123456789

@@ -16,7 +16,7 @@ class RemoveEmoji
      * @param string $string
      * @return string
      */
-    public function remove(string $string): string
+    public static function remove(string $string): string
     {
         return preg_replace(self::EMOJI_REGEX, '', $string);
     }

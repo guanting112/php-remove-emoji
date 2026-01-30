@@ -7,12 +7,7 @@ use RemoveEmoji\RemoveEmoji;
 
 class RemoveEmojiTest extends TestCase
 {
-    private RemoveEmoji $remover;
 
-    protected function setUp(): void
-    {
-        $this->remover = new RemoveEmoji();
-    }
 
     public function testFromRunes()
     {
@@ -20,12 +15,12 @@ class RemoveEmojiTest extends TestCase
         // Go: expected := []rune("Hi 哈洛沃德１２３ ")
         $input = "Hi 哈👾洛👾沃👾德👾１２👾👾３ 👾";
         $expected = "Hi 哈洛沃德１２３ ";
-        $this->assertEquals($expected, $this->remover->remove($input));
+        $this->assertEquals($expected, RemoveEmoji::remove($input));
     }
 
     public function testEmoji15Standards()
     {
-        $output = $this->remover->remove(TestFixtures::EMOJI_15_DATA);
+        $output = RemoveEmoji::remove(TestFixtures::EMOJI_15_DATA);
         $lines = explode("\n", $output);
         foreach ($lines as $i => $line) {
             if (trim($line) === "") continue;
@@ -39,7 +34,7 @@ class RemoveEmojiTest extends TestCase
 
     public function testEmoji131Standards()
     {
-        $output = $this->remover->remove(TestFixtures::EMOJI_13_1_DATA);
+        $output = RemoveEmoji::remove(TestFixtures::EMOJI_13_1_DATA);
         $lines = explode("\n", $output);
         foreach ($lines as $i => $line) {
             if (trim($line) === "") continue;
@@ -53,7 +48,7 @@ class RemoveEmojiTest extends TestCase
 
     public function testEmoji13BetaStandards()
     {
-        $output = $this->remover->remove(TestFixtures::EMOJI_13_BETA_DATA);
+        $output = RemoveEmoji::remove(TestFixtures::EMOJI_13_BETA_DATA);
         // Expect emoji removed. Check that it doesn't contain the sample emoji "😀"
         $this->assertStringNotContainsString("😀", $output);
         // Also check that it's just brackets and commas mostly
@@ -63,7 +58,7 @@ class RemoveEmojiTest extends TestCase
     public function testEmoji11Standards()
     {
         $input = TestFixtures::EMOJI_11_DATA;
-        $output = $this->remover->remove($input);
+        $output = RemoveEmoji::remove($input);
         
         // Go check logic:
         // if out == in { warning } else { check removed }
@@ -85,77 +80,77 @@ class RemoveEmojiTest extends TestCase
     public function testSymbolsRemoval()
     {
         $input = str_replace("\n", "", TestFixtures::COMMON_SYMBOLS_DATA);
-        $output = $this->remover->remove($input);
+        $output = RemoveEmoji::remove($input);
         $this->assertEquals("......", $output);
     }
 
     public function testEmojiFlagsRemoval()
     {
         $input = str_replace("\n", "", TestFixtures::EMOJI_FLAGS_DATA);
-        $output = $this->remover->remove($input);
+        $output = RemoveEmoji::remove($input);
         $this->assertEquals("......", $output);
     }
 
     public function testAppleEmojiRemoval()
     {
         $input = str_replace("\n", "", TestFixtures::APPLE_EMOJI_DATA);
-        $output = $this->remover->remove($input);
+        $output = RemoveEmoji::remove($input);
         $this->assertEquals("......", $output);
     }
 
     public function testEmojiVariationSequencesRemoval()
     {
         $input = TestFixtures::VARIATION_SEQUENCES_DATA;
-        $output = $this->remover->remove($input);
+        $output = RemoveEmoji::remove($input);
         $this->assertEquals("..", $output);
     }
 
     public function testFitzpatrickModifiersRemoval()
     {
         $input = TestFixtures::FITZPATRICK_DATA;
-        $output = $this->remover->remove($input);
+        $output = RemoveEmoji::remove($input);
         $this->assertEquals("..", $output);
     }
 
     public function testSymbolsPreservation()
     {
         $input = TestFixtures::SYMBOLS_PRESERVATION_DATA;
-        $output = $this->remover->remove($input);
+        $output = RemoveEmoji::remove($input);
         $this->assertEquals($input, $output);
     }
     
     public function testChinesePreservation()
     {
         $input = TestFixtures::CHINESE_DATA;
-        $output = $this->remover->remove($input);
+        $output = RemoveEmoji::remove($input);
         $this->assertEquals($input, $output);
     }
 
     public function testJapanesePreservation()
     {
         $input = TestFixtures::JAPANESE_DATA;
-        $output = $this->remover->remove($input);
+        $output = RemoveEmoji::remove($input);
         $this->assertEquals($input, $output);
     }
 
     public function testKoreanPreservation()
     {
         $input = TestFixtures::KOREAN_DATA;
-        $output = $this->remover->remove($input);
+        $output = RemoveEmoji::remove($input);
         $this->assertEquals($input, $output);
     }
 
     public function testSimplifiedChinesePreservation()
     {
         $input = TestFixtures::SIMPLIFIED_DATA;
-        $output = $this->remover->remove($input);
+        $output = RemoveEmoji::remove($input);
         $this->assertEquals($input, $output);
     }
 
     public function testBenchmarkPreservation()
     {
         $input = TestFixtures::BENCHMARK_DATA;
-        $output = $this->remover->remove($input);
+        $output = RemoveEmoji::remove($input);
         
         // Go test allowed minor diffs?
         // "if strings.TrimSpace(out) != strings.TrimSpace(tc.input)"
